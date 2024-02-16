@@ -24,9 +24,10 @@ In the first step, to run this script, you need to know the IP that the operatin
 In the first step, run the main.py script on your host system and enter the IP you found in the previous step.
 And here the work with the first system ends!
 
-Now run the client.py program on the system you want to send your commands to and enter the ip on which the first system is listening, and now it's the turn of your desired command, which commands according to the operating system you are using Run yourself and finally type 'e' and enter to exit the program.
+Now run the client.py script on your other system from which you send your commands to the host, and in the first step, enter the same IP that the host is listening to.
 
+The work is done and you can send your orders, I hope you enjoy it
 
-# Warning!!
+## Warning!!
 
 Avoid running it when you don't need it because this program can create security problems for your system and be subject to external attacks
