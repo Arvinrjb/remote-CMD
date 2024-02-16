@@ -13,12 +13,16 @@ pip install socket
 ### How to use?
 
 In the first step, to run this script, you need to know the IP that the operating system got from the DHCP server. To do this, use the `ipconfig` command in Windows and the `ifconfig` command in Linux.
+<br>
+<h1>In Windows:</h1>
+  <a href="https://github.com/Arvinrjb/remote-CMD"><img src="imgs/img1" alt="remote-CMD"></a>
 
-In the second step, run the client.py script on the system you want to enter your commands remotely, and then enter the ip you found in the previous step.
 
+
+In the first step, run the main.py script on your host system and enter the IP you found in the previous step.
 And here the work with the first system ends!
 
-Now run the main.py program on the system you want to send your commands to and enter the ip on which the first system is listening, and now it's the turn of your desired command, which commands according to the operating system you are using Run yourself and finally type 'e' and enter to exit the program.
+Now run the client.py program on the system you want to send your commands to and enter the ip on which the first system is listening, and now it's the turn of your desired command, which commands according to the operating system you are using Run yourself and finally type 'e' and enter to exit the program.
 
 
 # Warning!!
