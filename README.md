@@ -19,7 +19,7 @@ In the first step, to run this script, you need to know the IP that the operatin
 <hr>
 <h2>In Linux:</h2>
   <a href="https://github.com/Arvinrjb/remote-CMD"><img src="imgs/img2.png" alt="remote-CMD"></a>
-
+<hr>
 
 In the first step, run the main.py script on your host system and enter the IP you found in the previous step.
 And here the work with the first system ends!
