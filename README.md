@@ -14,9 +14,11 @@ pip install socket
 
 In the first step, to run this script, you need to know the IP that the operating system got from the DHCP server. To do this, use the `ipconfig` command in Windows and the `ifconfig` command in Linux.
 <br>
-<h1>In Windows:</h1>
+<h2>In Windows:</h2>
   <a href="https://github.com/Arvinrjb/remote-CMD"><img src="imgs/img1.png" alt="remote-CMD"></a>
-
+<hr>
+<h2>In Linux:</h2>
+  <a href="https://github.com/Arvinrjb/remote-CMD"><img src="imgs/img2.png" alt="remote-CMD"></a>
 
 
 In the first step, run the main.py script on your host system and enter the IP you found in the previous step.
