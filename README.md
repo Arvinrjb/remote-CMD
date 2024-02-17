@@ -6,8 +6,6 @@ This is a script for remote execution of operating system command line commands 
 Install [python3](https://www.python.org/downloads/)
 ```
 pip install colorama
-pip install platform
-pip install socket
 ```
 
 ### How to use?
