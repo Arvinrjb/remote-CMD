@@ -7,12 +7,11 @@ System = platform.system()
 server_ip = input(Fore.BLUE +"Enter your server ip: ")
 port = 8888
 server_protocol = input("server prtoccol TCP or UDP ?").upper()
-
-def server_TCP(server_ip):
+def server_TCP(server_ip, server_port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((server_ip, port))
     server_socket.listen()
-    print(f"start listening on {server_ip}:{port}")
+    print(f"start listening on {server_ip}:{server_port}")
     while True:
         client_socket, client_address = server_socket.accept()
 
@@ -41,7 +40,7 @@ def server_UDP(server_ip, server_port):
             print("Error:", result.stderr)
 while True:
     if server_protocol == "TCP":
-        server_TCP(server_ip)
+        server_TCP(server_ip, port)
     elif server_protocol == "UDP":
         server_UDP(server_ip, port)
     else:
