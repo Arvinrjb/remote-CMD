@@ -1,32 +1,48 @@
 import socket
-from os import system
+import subprocess
 import platform
 from colorama import Fore
 
 System = platform.system()
+server_ip = input(Fore.BLUE +"Enter your server ip: ")
+port = 8888
+server_protocol = input("server prtoccol TCP or UDP ?").upper()
 
-
-def main():
-    host = input(Fore.BLUE + "Enter your ip: ")
-    port = 8888
+def server_TCP(server_ip):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((host, port))
-    server_socket.listen(1)
-    print(f"start listening on {host}:{port}")
+    server_socket.bind((server_ip, port))
+    server_socket.listen()
+    print(f"start listening on {server_ip}:{port}")
     while True:
         client_socket, client_address = server_socket.accept()
 
         if System == "Linux":
-            system('clear')
+            subprocess.run('clear', shell=True)
         elif System == "Windows":
-            system('cls')
+            subprocess.run('cls', shell=True)
+        print(Fore.WHITE + f"Accepted connection from {client_address[0]}:{client_address[1]}")
+        command = client_socket.recv(1024).decode('utf-8')
+        print('command:', command)
+        result = subprocess.run(command, shell=True, capture_output=True, text=True)
+        print("Output:", result.stdout)
+        if result.stderr:
+            print("Error:", result.stderr)
+        print(Fore.BLUE + f"start listening on {server_ip}:{port}")
 
-        print(f"Accepted connection from {client_address[0]}:{client_address[1]}")
-        command = client_socket.recv(1024).decode()
-        system(command)
-        print(command)
-        client_socket.close()
-        print(f"start listening on {host}:{port}")
-
-
-main()
+def server_UDP(server_ip, server_port):
+    server_address = (server_ip, server_port)
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server_socket.bind(server_address)
+    while True:
+        command = server_socket.recvfrom(4096)
+        result = subprocess.run(command[0].decode('utf-8'), shell=True, capture_output=True, text=True)
+        print("Output:", result.stdout)
+        if result.stderr:
+            print("Error:", result.stderr)
+while True:
+    if server_protocol == "TCP":
+        server_TCP(server_ip)
+    elif server_protocol == "UDP":
+        server_UDP(server_ip, port)
+    else:
+        print(Fore.RED + "Invalid protocol. Please enter 'TCP' or 'UDP'.")
