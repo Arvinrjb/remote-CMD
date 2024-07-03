@@ -6,7 +6,7 @@ from colorama import Fore
 System = platform.system()
 server_ip = input(Fore.BLUE +"Enter your server ip: ")
 port = 8888
-server_protocol = input("server prtoccol TCP or UDP ?").upper()
+server_protocol = input("server prtocol TCP or UDP ?").upper()
 def server_TCP(server_ip, server_port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((server_ip, port))
