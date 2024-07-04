@@ -20,7 +20,7 @@ def network_info(interface_name):
         for address in interface_addresses:
             if address.family == socket.AF_INET:
                 ip = address.address
-                print("your IP Address:", ip)
+                print(f"your IP Address: {ip}")
                 return ip
 
 def server_TCP(server_ip, server_port):
