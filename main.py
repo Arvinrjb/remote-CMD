@@ -1,12 +1,28 @@
 import socket
 import subprocess
 import platform
+import psutil
 from colorama import Fore
 
 System = platform.system()
-server_ip = input(Fore.BLUE +"Enter your server ip: ")
 port = 8888
-server_protocol = input("server prtocol TCP or UDP ?").upper()
+def get_active_network():
+    interfaces = psutil.net_if_addrs()
+    for interface_name, interface_addresses in interfaces.items():
+        for address in interface_addresses:
+            if address.family == socket.AF_INET and not address.address.startswith("127."):
+                return interface_name
+    return None
+def network_info(interface_name):
+    interfaces = psutil.net_if_addrs()
+    if interface_name in interfaces:
+        interface_addresses = interfaces[interface_name]
+        for address in interface_addresses:
+            if address.family == socket.AF_INET:
+                ip = address.address
+                print("your IP Address:", ip)
+                return ip
+
 def server_TCP(server_ip, server_port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((server_ip, port))
@@ -39,10 +55,22 @@ def server_UDP(server_ip, server_port):
         if result.stderr:
             print("Error:", result.stderr)
         print(f"start listening UDP on {server_ip}:{server_port}")
+
+server_ip = input(Fore.BLUE +"Enter your server ip automatically or manual (default=automatically): ")
+if server_ip.lower() == "manual":
+    ip = input("Enter your server ip: ")
+else:
+    active_network = get_active_network()
+    if active_network:
+        ip = network_info(active_network)
+    else:
+        print(Fore.RED + "No active network found.")
+        ip = input(Fore.WHITE + "Enter your server ip: ")
+server_protocol = input("server prtocol TCP or UDP ?").upper()
 while True:
     if server_protocol == "TCP":
-        server_TCP(server_ip, port)
+        server_TCP(ip, port)
     elif server_protocol == "UDP":
-        server_UDP(server_ip, port)
+        server_UDP(ip, port)
     else:
         print(Fore.RED + "Invalid protocol. Please enter 'TCP' or 'UDP'.")
