@@ -10,7 +10,7 @@ pip install colorama
 
 ### How to use?
 
-In the first step, to run this script, you need to know the IP that the operating system got from the DHCP server. To do this, use the `ipconfig` command in Windows and the `ifconfig` command in Linux.
+In the first step, to run this script, you need to know the IP that the operating system has obtained from the DHCP server (if you use the automatic mode to detect the IP, you don't need to do this anymore) for this, use the `ipconfig` command in Windows and the `ifconfig` command in Use Linux.
 <br>
 <h2>In Windows:</h2>
   <a href="https://github.com/Arvinrjb/remote-CMD"><img src="imgs/img1.png" alt="remote-CMD"></a>
@@ -19,10 +19,11 @@ In the first step, to run this script, you need to know the IP that the operatin
   <a href="https://github.com/Arvinrjb/remote-CMD"><img src="imgs/img2.png" alt="remote-CMD"></a>
 <hr>
 
-In the first step, run the main.py script on your host system and enter the IP you found in the previous step.
-And here the work with the first system ends!
+In the second step, run the main.py script on your server system and enter the IP you found in the previous step (or use the automatic mode) and then specify the TCP or UDP type.
+And this is the end of the first system!
 
-Now run the client.py script on your other system from which you send your commands to the host, and in the first step, enter the same IP that the host is listening to.
+
+Now run the client.py script on your other system from which you send your commands to the server and enter the same IP that the server listens to and after entering your commands specify the type of TCP or UDP. (use the one that the server listens to)
 
 The work is done and you can send your orders, I hope you enjoy it
 
