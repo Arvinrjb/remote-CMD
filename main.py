@@ -9,9 +9,13 @@ System = platform.system()
 port = 8888
 local_ping = input(Fore.WHITE + "Can I get a ping from your internal networks? (yes or no) : ")
 count = 1
+if System.lower() == "windows":
+    sys = '-n'
+else:
+    sys = '-c'
 
 def ping(host):
-    process = subprocess.Popen(['ping','-n','1', host], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(['ping',sys ,'1', host], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
     if "Destination host unreachable" not in stdout.decode():
         print(Fore.GREEN + f"ping:{host} good")
@@ -54,9 +58,9 @@ def server_TCP(server_ip, server_port):
     print(f"start listening TCP on {server_ip}:{server_port}")
     while True:
         client_socket, client_address = server_socket.accept()
-        if System == "Linux":
+        if System.lower() == "linux":
             subprocess.run('clear', shell=True)
-        elif System == "Windows":
+        elif System.lower() == "windows":
             subprocess.run('cls', shell=True)
         print(Fore.WHITE + f"Accepted connection from {client_address[0]}:{client_address[1]}")
         command = client_socket.recv(1024).decode('utf-8')
