@@ -20,8 +20,6 @@ def ping(host):
     if "Destination host unreachable" not in stdout.decode():
         print(Fore.GREEN + f"ping:{host} good")
         ip_list.append(host)
-    elif "Destination host unreachable" in stdout.decode():
-        print(Fore.RED + f"ping: {host} bad ")
     else:
         print(Fore.RED + f"ping: {host} bad")
 
