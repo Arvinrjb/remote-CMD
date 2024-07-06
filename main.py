@@ -4,8 +4,31 @@ import platform
 import psutil
 from colorama import Fore
 
+ip_list = []
 System = platform.system()
 port = 8888
+local_ping = input(Fore.WHITE + "Can I get a ping from your internal networks? (yes or no) : ")
+count = 1
+
+def ping(host):
+    process = subprocess.Popen(['ping','-n','1', host], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    if "Destination host unreachable" not in stdout.decode():
+        print(Fore.GREEN + f"ping:{host} good")
+        ip_list.append(host)
+    elif "Destination host unreachable" in stdout.decode():
+        print(Fore.RED + f"ping: {host} bad ")
+    else:
+        print(Fore.RED + f"ping: {host} bad")
+
+if local_ping.lower() == "yes":
+
+    while count < 255:
+        host_ip = f"192.168.1.{count}"
+        ping(host_ip)
+        count += 1
+    print(ip_list)
+
 def get_active_network():
     interfaces = psutil.net_if_addrs()
     for interface_name, interface_addresses in interfaces.items():
@@ -13,6 +36,7 @@ def get_active_network():
             if address.family == socket.AF_INET and not address.address.startswith("127."):
                 return interface_name
     return None
+
 def network_info(interface_name):
     interfaces = psutil.net_if_addrs()
     if interface_name in interfaces:
@@ -20,7 +44,7 @@ def network_info(interface_name):
         for address in interface_addresses:
             if address.family == socket.AF_INET:
                 ip = address.address
-                print(f"your IP Address: {ip}")
+                print(f"your IP Address:{ip}")
                 return ip
 
 def server_TCP(server_ip, server_port):
