@@ -7,7 +7,9 @@ Install [python3](https://www.python.org/downloads/)
 ```
 pip install colorama
 ```
-
+```
+pip install psutil
+```
 ### How to use?
 
 In the first step, to run this script, you need to know the IP that the operating system has obtained from the DHCP server (if you use the automatic mode to detect the IP, you don't need to do this anymore) for this, use the `ipconfig` command in Windows and the `ifconfig` command in Use Linux.
