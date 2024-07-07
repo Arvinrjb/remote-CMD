@@ -13,11 +13,12 @@ if System.lower() == "windows":
     sys = '-n'
 else:
     sys = '-c'
-
 def ping(host):
     process = subprocess.Popen(['ping',sys ,'1', host], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
-    if "Destination host unreachable" not in stdout.decode():
+    if stderr.decode():
+        print(stderr.decode())
+    elif "Destination host unreachable" not in stdout.decode():
         print(Fore.GREEN + f"ping:{host} good")
         ip_list.append(host)
     else:
@@ -67,6 +68,7 @@ def server_TCP(server_ip, server_port):
         print("Output:", result.stdout)
         if result.stderr:
             print("Error:", result.stderr)
+        client_socket.sendall(str(result.stdout).encode())
         print(Fore.BLUE + f"start listening TCP on {server_ip}:{port}")
 
 def server_UDP(server_ip, server_port):
