@@ -18,7 +18,7 @@ def send_command_TCP(address, port, command):
     try:
         client_socket.connect((address, port))
         client_socket.sendall(command.encode('utf-8'))
-        data_output = client_socket.recv(1024).decode()
+        data_output = client_socket.recv(4096).decode()
         print(data_output) 
     except Exception as error:
         print(Fore.RED + "Error:", error)
